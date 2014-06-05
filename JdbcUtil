@@ -1,0 +1,46 @@
+package shopping.inovits.com;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class JdbcUtil {
+	static{
+		try{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public static Connection getOracleConnection(){
+		Connection con=null;
+		try{
+			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return con;
+	}
+	public static void Cleanup(Statement st,Connection con){
+		try{
+			if(st!=null)st.close();
+			if(con!=null)con.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public static void Cleanup(ResultSet rs,Statement st,Connection con){
+		try{
+			if(rs!=null)rs.close();
+			if(st!=null)st.close();
+			if(con!=null)con.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

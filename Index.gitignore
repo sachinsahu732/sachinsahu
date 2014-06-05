@@ -1,0 +1,11 @@
+
+<html>
+<head>
+<body>
+<h1>welcome to ebiz shopping center</h1>
+<tr><td><tr><a href="AdminLogin.html">AdminLogin</a></td></tr>
+<tr><td><a href="CustomerLogin.html">CustomerLogin</a></tr></td>
+<tr><a href="NewCustomerRegister.html">NewUser</a></tr>
+</body>
+</head>
+</html>

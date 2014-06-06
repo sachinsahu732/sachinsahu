@@ -1,0 +1,46 @@
+package Inovits.com;
+
+
+import java.io.IOException;
+import java.io.Writer;
+import java.sql.*;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
+
+public class CustomerLoginServlet extends HttpServlet {
+	
+	UserService us=null;
+	public void init(ServletConfig sc){
+		us=new UserService();
+	
+	}
+
+	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException,ServletException{
+		String un=req.getParameter("uname");
+		String pw=req.getParameter("password");
+		int x=us.VerifyUser(un,pw);
+		HttpSession session=req.getSession();
+		String result="  ";
+		if(x==1){
+			session.setAttribute("UN", un);
+		
+		result="Customer.html";
+		}else
+	{
+		String msg="invalid username or password";
+		req.setAttribute("msg",msg);
+		result="CustomerLogin.html";
+	}
+	RequestDispatcher rd=req.getRequestDispatcher(result);
+	rd.forward(req,res);
+}
+}
+		

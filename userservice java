@@ -1,0 +1,57 @@
+package Inovits.com;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class UserService {
+
+	public int VerifyUser(String un,String pw){
+		int x=0;
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try{
+			con=JdbcUtil.getOracleConnection();
+			String sql="select * from admin where UserName=? and Password=?";
+			ps=con.prepareStatement(sql);
+			ps.setString(1,un);
+			ps.setString(2,pw);
+			rs=ps.executeQuery();
+			if(rs.next()){
+				x=1;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			JdbcUtil.Cleanup(rs, ps, con);
+		}
+		return x;
+	}
+	public int RegisterUser(UserTo uto){
+		int x=0;
+		Connection con=null;
+		PreparedStatement ps=null;
+		try{
+			con=JdbcUtil.getOracleConnection();
+			String sql="insert into Customer values(?,?,?,?,?,?)";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, uto.getUserName());
+			ps.setString(1, uto.getFname());
+			ps.setString(1, uto.getPassword());
+			ps.setString(1, uto.getEmail());
+			ps.setString(1, uto.getPhone());
+			ps.setString(1, uto.getGender());
+			x=ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			JdbcUtil.Cleanup(ps, con);
+		}
+		return x;
+	}
+	
+			
+		}
+		
+	

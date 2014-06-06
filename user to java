@@ -1,0 +1,62 @@
+package Inovits.com;
+
+public class UserTo {
+
+	private String UserName;
+	private String Fname;
+	private String Password;
+	private String Email ;
+	private String Phone;
+	private String Gender;
+	
+	public UserTo(){
+		
+	}
+	public UserTo(String UserName,String Fname,String Password,String Email,String phone,String Gender){
+		super();
+		this.UserName=UserName;
+		this.Fname=Fname;
+		this.Password=Password;
+		this.Email=Email;
+		this.Phone=phone;
+		this.Gender=Gender;
+	}
+	public String getUserName() {
+		return UserName;
+	}
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+	public String getFname() {
+		return Fname;
+	}
+	public void setFname(String fname) {
+		Fname = fname;
+	}
+	public String getPassword() {
+		return Password;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
+	public String getPhone() {
+		return Phone;
+	}
+	public void setPhone(String phone) {
+		Phone = phone;
+	}
+	public String getGender() {
+		return Gender;
+	}
+	public void setGender(String gender) {
+		Gender = gender;
+	}
+	
+	
+}

@@ -1,0 +1,46 @@
+package Inovits.com;
+
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+public class RegisterServlet extends HttpServlet {
+
+	UserService us=null;
+	public void init(ServletConfig sc){
+		us=new UserService();
+	}
+	public void Service(HttpServletRequest req,HttpServletResponse res) throws IOException,ServletException{
+		
+		String un=req.getParameter("Username");
+		String fn=req.getParameter("fname");
+		String pw=req.getParameter("Password");
+		String em=req.getParameter("email");
+		String ph=req.getParameter("phone");
+		String gn=req.getParameter("gender");
+		UserTo uto=new UserTo(un,fn,pw,em,ph,gn);
+		int x=us.RegisterUser(uto);
+		HttpSession session=req.getSession();
+		String result="";
+		if(x==1){
+			session.setAttribute("un", un);
+			result="CustomerLogin.html";
+		String sub="registration sucess";
+		String body="<h1> hi"+fn+"your registration successfull</h1>";
+	}
+	else
+	{
+		String msg="registration failed try again";
+		req.setAttribute("msg", msg);
+		result="NewCustomerReg.html";
+			}
+		RequestDispatcher rd=req.getRequestDispatcher(result);
+		rd.forward(req, res);
+	}
+}
